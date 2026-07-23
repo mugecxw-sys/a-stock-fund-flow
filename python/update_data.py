@@ -9,7 +9,7 @@ df = ak.stock_sector_fund_flow_rank(
     indicator="今日",
     sector_type="概念资金流"
 )
-
+print(df.columns.tolist())
 
 # 按主力净流入排序
 # 取前20个
@@ -24,7 +24,24 @@ for _, row in df.iterrows():
 
     name = row["名称"]
 
-    money = row["主力净流入-净额"]
+    # 自动寻找资金字段
+
+money_column = None
+
+for col in df.columns:
+
+    if "主力净流入" in col:
+        money_column = col
+        break
+
+
+if money_column is None:
+    raise Exception(
+        "没有找到主力资金字段，请检查AKShare返回数据"
+    )
+
+
+money = row[money_column]
 
 
     # 单位转换：
