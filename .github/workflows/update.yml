@@ -83,7 +83,7 @@ jobs:
         run: |
 
 
-          python python/update_data.py
+          python python/check_ak.py
 
 
 
