@@ -1,11 +1,12 @@
 import akshare as ak
 import json
 import time
+import os
 from datetime import datetime
 
 
 # ==========================
-# 获取资金流数据（带重试）
+# 获取资金流数据
 # ==========================
 
 df = None
@@ -15,7 +16,12 @@ for i in range(3):
 
     try:
 
-        print("正在获取资金流，第", i+1, "次")
+        print(
+            "获取资金流，第",
+            i + 1,
+            "次"
+        )
+
 
         df = ak.stock_sector_fund_flow_rank(
             indicator="今日",
@@ -32,7 +38,10 @@ for i in range(3):
 
     except Exception as e:
 
-        print("获取失败：", e)
+        print(
+            "失败:",
+            e
+        )
 
         time.sleep(10)
 
@@ -41,67 +50,67 @@ for i in range(3):
 if df is None or len(df) == 0:
 
     raise Exception(
-        "AKShare获取数据失败"
+        "资金数据获取失败"
     )
 
 
 
-print("字段：")
-
-print(df.columns.tolist())
+print(
+    df.columns.tolist()
+)
 
 
 
 # ==========================
-# 自动寻找字段
+# 查找字段
 # ==========================
 
 
 name_column = None
 
+money_column = None
+
+
+
 for col in df.columns:
+
 
     if "名称" in col:
 
         name_column = col
 
-        break
 
-
-
-money_column = None
-
-for col in df.columns:
 
     if "主力净流入" in col:
 
         money_column = col
 
-        break
 
 
 
 if name_column is None:
 
     raise Exception(
-        "没有找到板块名称字段"
+        "没有找到名称字段"
     )
+
 
 
 if money_column is None:
 
     raise Exception(
-        "没有找到主力资金字段"
+        "没有找到资金字段"
     )
 
 
 
 # ==========================
-# 数据整理
+# 数据处理
 # ==========================
 
 
 all_data = []
+
 
 
 for _, row in df.iterrows():
@@ -120,10 +129,6 @@ for _, row in df.iterrows():
 
     except:
 
-
-        # 如果是字符串，例如：
-        # 12.5亿
-
         money = 0
 
 
@@ -134,14 +139,12 @@ for _, row in df.iterrows():
     )
 
 
+
     all_data.append(
 
         {
-
             "name": name,
-
             "money": money
-
         }
 
     )
@@ -149,7 +152,7 @@ for _, row in df.iterrows():
 
 
 # ==========================
-# 资金流入10个
+# TOP10流入 + TOP10流出
 # ==========================
 
 
@@ -163,11 +166,6 @@ inflow = sorted(
 
 )[:10]
 
-
-
-# ==========================
-# 资金流出10个
-# ==========================
 
 
 outflow = sorted(
@@ -185,7 +183,7 @@ final_data = inflow + outflow
 
 
 # ==========================
-# 保存JSON
+# 生成结果
 # ==========================
 
 
@@ -199,11 +197,18 @@ result = {
         ),
 
 
-    "data": final_data
+    "data":
+
+        final_data
 
 
 }
 
+
+
+# ==========================
+# 保存最新数据
+# ==========================
 
 
 with open(
@@ -231,8 +236,58 @@ with open(
 
 
 
+# ==========================
+# 保存历史数据
+# ==========================
+
+
+if not os.path.exists(
+    "history"
+):
+
+    os.makedirs(
+        "history"
+    )
+
+
+
+today = datetime.now().strftime(
+    "%Y-%m-%d"
+)
+
+
+
+with open(
+
+    f"history/{today}.json",
+
+    "w",
+
+    encoding="utf-8"
+
+) as f:
+
+
+    json.dump(
+
+        result,
+
+        f,
+
+        ensure_ascii=False,
+
+        indent=2
+
+    )
+
+
+
 print(
-    "资金流更新完成，共",
-    len(final_data),
-    "个板块"
+    "更新完成"
+)
+
+
+print(
+    "保存历史:",
+    today
 )
