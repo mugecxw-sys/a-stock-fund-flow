@@ -1,78 +1,129 @@
 name: Update A Stock Money Flow
 
+
 on:
 
+
   schedule:
-    # 每小时运行一次
-    - cron: "0 * * * *"
+
+
+    # 北京时间:
+    # 10:00
+    # 11:00
+    # 13:00
+    # 14:00
+    # 15:00
+    #
+    # GitHub Actions 使用 UTC时间
+    #
+    # 北京时间 = UTC+8
+
+
+    - cron: "0 2,3,5,6,7 * * 1-5"
+
+
 
   workflow_dispatch:
 
 
-# 允许Actions提交更新后的json文件
+
 permissions:
+
 
   contents: write
 
 
 
+
 jobs:
+
 
   update:
 
+
+
     runs-on: ubuntu-latest
+
 
 
     steps:
 
 
-      # 拉取代码
+
+      # 获取代码
+
       - name: Checkout
+
 
         uses: actions/checkout@v4
 
 
 
-      # 安装Python
+
+      # Python环境
+
+
       - name: Setup Python
+
 
         uses: actions/setup-python@v5
 
+
         with:
+
 
           python-version: "3.11"
 
 
 
+
       # 安装依赖
+
+
       - name: Install packages
 
+
         run: |
+
 
           pip install akshare pandas
 
 
 
-      # 运行数据更新程序
+
+      # 更新资金数据
+
+
       - name: Update data
 
+
         run: |
+
 
           python python/update_data.py
 
 
 
-      # 提交新的资金数据
+
+      # 保存更新
+
+
       - name: Commit changes
+
 
         run: |
 
+
           git config --global user.name "github-actions"
+
 
           git config --global user.email "actions@github.com"
 
-          git add moneyflow.json
+
+          git add moneyflow.json history/
+
 
           git commit -m "update money flow" || exit 0
+
 
           git push
