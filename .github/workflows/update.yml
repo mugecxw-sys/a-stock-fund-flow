@@ -1,23 +1,24 @@
 name: Update A Stock Money Flow
 
-
 on:
 
   schedule:
-
     # 每小时运行一次
     - cron: "0 * * * *"
 
-
   workflow_dispatch:
+
+
+# 允许Actions提交更新后的json文件
+permissions:
+
+  contents: write
 
 
 
 jobs:
 
-
   update:
-
 
     runs-on: ubuntu-latest
 
@@ -25,12 +26,14 @@ jobs:
     steps:
 
 
+      # 拉取代码
       - name: Checkout
 
         uses: actions/checkout@v4
 
 
 
+      # 安装Python
       - name: Setup Python
 
         uses: actions/setup-python@v5
@@ -41,6 +44,7 @@ jobs:
 
 
 
+      # 安装依赖
       - name: Install packages
 
         run: |
@@ -49,6 +53,7 @@ jobs:
 
 
 
+      # 运行数据更新程序
       - name: Update data
 
         run: |
@@ -57,6 +62,7 @@ jobs:
 
 
 
+      # 提交新的资金数据
       - name: Commit changes
 
         run: |
