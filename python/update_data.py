@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 
 
+
 def get_data():
 
     for i in range(3):
@@ -13,7 +14,7 @@ def get_data():
 
             print(
                 "获取资金流，第",
-                i + 1,
+                i+1,
                 "次"
             )
 
@@ -24,9 +25,7 @@ def get_data():
             )
 
 
-            if df is not None and len(df) > 0:
-
-                print("获取成功")
+            if df is not None and len(df)>0:
 
                 return df
 
@@ -38,6 +37,7 @@ def get_data():
                 e
             )
 
+
             time.sleep(15)
 
 
@@ -46,9 +46,6 @@ def get_data():
 
 
 
-# =====================
-# 获取数据
-# =====================
 
 df = get_data()
 
@@ -58,11 +55,12 @@ if df is None:
 
 
     print(
-        "资金接口失败，保持旧数据"
+        "获取失败，保持旧数据"
     )
 
 
     exit(0)
+
 
 
 
@@ -72,14 +70,14 @@ print(
 
 
 
-# =====================
-# 字段识别
-# =====================
+# ===================
+# 找字段
+# ===================
 
 
-name_column = None
+name_column=None
 
-money_column = None
+money_column=None
 
 
 
@@ -88,12 +86,12 @@ for col in df.columns:
 
     if "名称" in col:
 
-        name_column = col
+        name_column=col
 
 
     if "主力净流入" in col:
 
-        money_column = col
+        money_column=col
 
 
 
@@ -101,7 +99,7 @@ for col in df.columns:
 if name_column is None:
 
     raise Exception(
-        "没有名称字段"
+        "名称字段不存在"
     )
 
 
@@ -109,14 +107,15 @@ if name_column is None:
 if money_column is None:
 
     raise Exception(
-        "没有资金字段"
+        "资金字段不存在"
     )
 
 
 
-# =====================
+
+# ===================
 # 数据处理
-# =====================
+# ===================
 
 
 all_data=[]
@@ -160,9 +159,10 @@ for _,row in df.iterrows():
 
 
 
-# =====================
-# TOP10
-# =====================
+
+# ===================
+# 当前资金
+# ===================
 
 
 inflow=sorted(
@@ -187,13 +187,9 @@ outflow=sorted(
 
 
 
-data=inflow+outflow
+now_data=inflow+outflow
 
 
-
-# =====================
-# 生成结果
-# =====================
 
 
 now=datetime.now()
@@ -202,25 +198,26 @@ now=datetime.now()
 
 result={
 
-
     "update_time":
 
-        now.strftime(
-            "%Y-%m-%d %H:%M:%S"
-        ),
+    now.strftime(
+        "%Y-%m-%d %H:%M:%S"
+    ),
 
 
     "data":
 
-        data
+    now_data
 
 }
 
 
 
-# =====================
-# 保存最新
-# =====================
+
+
+# ===================
+# 保存当前
+# ===================
 
 
 with open(
@@ -248,35 +245,38 @@ with open(
 
 
 
-# =====================
+
+
+# ===================
 # 保存小时历史
-# =====================
+# ===================
 
 
-date_folder = now.strftime(
+folder_date=now.strftime(
     "%Y-%m-%d"
 )
 
 
-time_file = now.strftime(
+folder=f"history/{folder_date}"
+
+
+
+os.makedirs(
+    folder,
+    exist_ok=True
+)
+
+
+
+file_time=now.strftime(
     "%H-%M"
 )
 
 
 
-folder = f"history/{date_folder}"
-
-
-
-if not os.path.exists(folder):
-
-    os.makedirs(folder)
-
-
-
 with open(
 
-    f"{folder}/{time_file}.json",
+    f"{folder}/{file_time}.json",
 
     "w",
 
@@ -299,12 +299,166 @@ with open(
 
 
 
+
+
+# ===================
+# 计算今日趋势
+# ===================
+
+
+trend={}
+
+
+
+history_files=[]
+
+
+
+for root,dirs,files in os.walk(
+    "history"
+):
+
+
+    for file in files:
+
+        if file.endswith(".json"):
+
+            history_files.append(
+                os.path.join(root,file)
+            )
+
+
+
+
+# 读取今天所有记录
+
+
+for file in history_files:
+
+
+    try:
+
+
+        with open(
+
+            file,
+
+            "r",
+
+            encoding="utf-8"
+
+        ) as f:
+
+
+            old=json.load(f)
+
+
+
+        for item in old["data"]:
+
+
+            name=item["name"]
+
+
+            money=item["money"]
+
+
+            if name not in trend:
+
+                trend[name]=0
+
+
+
+            trend[name]+=money
+
+
+
+    except:
+
+        pass
+
+
+
+
+trend_list=[]
+
+
+
+for k,v in trend.items():
+
+
+    trend_list.append({
+
+        "name":k,
+
+        "money":round(v,2)
+
+    })
+
+
+
+trend_list=sorted(
+
+    trend_list,
+
+    key=lambda x:x["money"],
+
+    reverse=True
+
+)[:20]
+
+
+
+
+trend_result={
+
+
+    "update_time":
+
+    now.strftime(
+        "%Y-%m-%d %H:%M:%S"
+    ),
+
+
+    "data":
+
+    trend_list
+
+
+}
+
+
+
+with open(
+
+    "trend.json",
+
+    "w",
+
+    encoding="utf-8"
+
+) as f:
+
+
+    json.dump(
+
+        trend_result,
+
+        f,
+
+        ensure_ascii=False,
+
+        indent=2
+
+    )
+
+
+
 print(
-    "更新完成"
+    "当前资金更新完成"
 )
 
 
 print(
-    "历史保存:",
-    f"{folder}/{time_file}.json"
+    "趋势数据更新完成"
 )
