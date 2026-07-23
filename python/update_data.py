@@ -5,53 +5,75 @@ import os
 from datetime import datetime
 
 
-# ==========================
-# 获取资金流数据
-# ==========================
+def get_data():
 
-df = None
+    for i in range(3):
 
+        try:
 
-for i in range(3):
-
-    try:
-
-        print(
-            "获取资金流，第",
-            i + 1,
-            "次"
-        )
+            print(
+                "获取资金流，第",
+                i + 1,
+                "次"
+            )
 
 
-        df = ak.stock_sector_fund_flow_rank(
-            indicator="今日",
-            sector_type="概念资金流"
-        )
+            df = ak.stock_sector_fund_flow_rank(
+                indicator="今日",
+                sector_type="概念资金流"
+            )
 
 
-        if df is not None and len(df) > 0:
+            if df is not None and len(df) > 0:
 
-            print("获取成功")
+                print("获取成功")
 
-            break
+                return df
 
 
-    except Exception as e:
+        except Exception as e:
 
-        print(
-            "失败:",
-            e
-        )
+            print(
+                "失败:",
+                e
+            )
 
-        time.sleep(10)
+
+            time.sleep(15)
 
 
 
-if df is None or len(df) == 0:
+    return None
 
-    raise Exception(
-        "资金数据获取失败"
+
+
+# =====================
+# 获取数据
+# =====================
+
+df = get_data()
+
+
+
+# =====================
+# 获取失败
+# 保留旧数据
+# =====================
+
+if df is None:
+
+
+    print(
+        "资金接口失败"
     )
+
+
+    print(
+        "保留已有数据"
+    )
+
+
+    exit(0)
 
 
 
@@ -61,9 +83,9 @@ print(
 
 
 
-# ==========================
-# 查找字段
-# ==========================
+# =====================
+# 找字段
+# =====================
 
 
 name_column = None
@@ -80,18 +102,16 @@ for col in df.columns:
         name_column = col
 
 
-
     if "主力净流入" in col:
 
         money_column = col
 
 
 
-
 if name_column is None:
 
     raise Exception(
-        "没有找到名称字段"
+        "没有名称字段"
     )
 
 
@@ -99,64 +119,62 @@ if name_column is None:
 if money_column is None:
 
     raise Exception(
-        "没有找到资金字段"
+        "没有资金字段"
     )
 
 
 
-# ==========================
-# 数据处理
-# ==========================
+# =====================
+# 数据整理
+# =====================
 
 
-all_data = []
+all_data=[]
 
 
 
-for _, row in df.iterrows():
+for _,row in df.iterrows():
 
 
-    name = row[name_column]
+    name=row[name_column]
 
 
-    money = row[money_column]
+    money=row[money_column]
 
 
     try:
 
-        money = float(money)
-
+        money=float(money)
 
     except:
 
-        money = 0
+        money=0
 
 
 
-    money = round(
-        money / 100000000,
+    money=round(
+        money/100000000,
         2
     )
 
 
 
-    all_data.append(
+    all_data.append({
 
-        {
-            "name": name,
-            "money": money
-        }
+        "name":name,
 
-    )
+        "money":money
 
+    })
 
 
-# ==========================
-# TOP10流入 + TOP10流出
-# ==========================
+
+# =====================
+# 流入流出
+# =====================
 
 
-inflow = sorted(
+inflow=sorted(
 
     all_data,
 
@@ -168,7 +186,7 @@ inflow = sorted(
 
 
 
-outflow = sorted(
+outflow=sorted(
 
     all_data,
 
@@ -178,16 +196,7 @@ outflow = sorted(
 
 
 
-final_data = inflow + outflow
-
-
-
-# ==========================
-# 生成结果
-# ==========================
-
-
-result = {
+result={
 
 
     "update_time":
@@ -199,16 +208,15 @@ result = {
 
     "data":
 
-        final_data
-
+        inflow+outflow
 
 }
 
 
 
-# ==========================
-# 保存最新数据
-# ==========================
+# =====================
+# 保存最新
+# =====================
 
 
 with open(
@@ -236,9 +244,9 @@ with open(
 
 
 
-# ==========================
-# 保存历史数据
-# ==========================
+# =====================
+# 保存历史
+# =====================
 
 
 if not os.path.exists(
@@ -251,7 +259,7 @@ if not os.path.exists(
 
 
 
-today = datetime.now().strftime(
+today=datetime.now().strftime(
     "%Y-%m-%d"
 )
 
@@ -284,10 +292,4 @@ with open(
 
 print(
     "更新完成"
-)
-
-
-print(
-    "保存历史:",
-    today
 )
