@@ -1,40 +1,91 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
+
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A股概念板块主力资金流向</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<title>
+A股资金流监控
+</title>
 
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 
 
+
 <style>
+
 
 body{
 
-    margin:0;
+margin:0;
 
-    background:#f3f5f7;
+background:#f5f6fa;
 
-    font-family:
-    "Microsoft YaHei",
-    Arial;
+font-family:
+"Microsoft YaHei",
+Arial;
+
+color:#222;
 
 }
 
 
+
 .container{
 
-    max-width:1200px;
+max-width:1200px;
 
-    margin:auto;
+margin:auto;
 
-    padding:20px;
+padding:20px;
+
+}
+
+
+
+.title{
+
+text-align:center;
+
+font-size:28px;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+}
+
+
+
+.time{
+
+text-align:center;
+
+color:#777;
+
+margin-bottom:20px;
+
+}
+
+
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:20px;
 
 }
 
@@ -42,47 +93,96 @@ body{
 
 .card{
 
-    background:white;
+background:white;
 
-    border-radius:15px;
+border-radius:16px;
 
-    padding:20px;
+padding:20px;
 
-    box-shadow:
-    0 3px 15px rgba(0,0,0,0.08);
-
-}
-
-
-
-h1{
-
-    text-align:center;
-
-    font-size:26px;
-
-}
-
-
-.update{
-
-    text-align:center;
-
-    color:#666;
-
-    margin-bottom:20px;
+box-shadow:
+0 5px 20px rgba(0,0,0,.08);
 
 }
 
 
 
-#chart{
+.card h2{
 
-    width:100%;
-
-    height:650px;
+margin-top:0;
 
 }
+
+
+
+.inflow h2{
+
+color:#e74c3c;
+
+}
+
+
+
+.outflow h2{
+
+color:#27ae60;
+
+}
+
+
+
+.item{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:8px 0;
+
+border-bottom:
+1px solid #eee;
+
+}
+
+
+
+.money{
+
+font-weight:bold;
+
+}
+
+
+
+.chart{
+
+margin-top:20px;
+
+height:600px;
+
+background:white;
+
+border-radius:16px;
+
+padding:10px;
+
+}
+
+
+
+@media(max-width:700px){
+
+
+.cards{
+
+grid-template-columns:
+1fr;
+
+}
+
+
+
+}
+
 
 
 </style>
@@ -91,250 +191,230 @@ h1{
 </head>
 
 
+
 <body>
 
 
 <div class="container">
 
 
-<div class="card">
+<div class="title">
 
-
-<h1>
-A股概念板块主力资金流向
-</h1>
-
-
-<div class="update" id="time">
-
-数据加载中...
+A股概念板块主力资金监控
 
 </div>
 
 
-<div id="chart"></div>
+
+<div class="time" id="time">
+
+加载中...
+
+</div>
+
+
+
+<div class="cards">
+
+
+<div class="card inflow">
+
+
+<h2>
+🔥 资金流入 TOP10
+</h2>
+
+
+<div id="inflow"></div>
+
+
+</div>
+
+
+
+
+<div class="card outflow">
+
+
+<h2>
+⚠️ 资金流出 TOP10
+</h2>
+
+
+<div id="outflow"></div>
 
 
 </div>
 
 
 </div>
+
+
+
+<div class="chart" id="chart"></div>
+
+
+
+</div>
+
+
 
 
 
 <script>
 
 
-async function loadData(){
+async function load(){
 
 
-    try{
+let res=
+await fetch(
+"moneyflow.json?t="+Date.now()
+);
 
 
-        const res =
-        await fetch(
-        "moneyflow.json?t="
-        +Date.now()
-        );
+let json=
+await res.json();
 
 
-        const json =
-        await res.json();
+let data=json.data;
 
 
 
-        const data =
-        json.data;
+document.getElementById("time")
+.innerHTML=
+"更新时间："+json.update_time;
 
 
 
-        let names=[];
+let inflow=data
+.filter(x=>x.money>0)
+.slice(0,10);
 
-        let values=[];
 
-        let colors=[];
 
+let outflow=data
+.filter(x=>x.money<0)
+.slice(0,10);
 
 
-        data.forEach(item=>{
 
 
-            names.push(
-                item.name
-            );
+document.getElementById("inflow")
+.innerHTML=inflow.map(x=>`
 
+<div class="item">
 
-            values.push(
-                item.money
-            );
+<span>${x.name}</span>
 
+<span class="money" style="color:#e74c3c">
 
-            if(item.money>=0){
++${x.money} 亿
 
-                colors.push("#e74c3c");
+</span>
 
-            }else{
+</div>
 
-                colors.push("#2ecc71");
+`).join("");
 
-            }
 
 
-        });
 
 
+document.getElementById("outflow")
+.innerHTML=outflow.map(x=>`
 
-        document.getElementById("time")
-        .innerHTML=
-        "更新时间："
-        +json.update_time;
+<div class="item">
 
+<span>${x.name}</span>
 
+<span class="money" style="color:#27ae60">
 
-        let chart =
-        echarts.init(
-        document.getElementById("chart")
-        );
+${x.money} 亿
 
+</span>
 
+</div>
 
-        let option={
+`).join("");
 
 
 
-            tooltip:{
 
 
-                trigger:"axis",
+let chart=
+echarts.init(
+document.getElementById("chart")
+);
 
 
-                formatter:function(p){
 
 
-                    return p[0].name
-                    +"<br>主力资金："
-                    +p[0].value
-                    +" 亿";
+chart.setOption({
 
 
-                }
+tooltip:{
+trigger:"axis"
+},
 
 
-            },
+xAxis:{
 
 
+type:"category",
 
-            grid:{
+data:data.map(x=>x.name),
 
 
-                left:"5%",
+axisLabel:{
+rotate:45
+}
 
-                right:"5%",
 
-                bottom:"25%"
+},
 
 
-            },
+yAxis:{
 
 
+type:"value",
 
-            xAxis:{
+name:"亿元"
 
 
-                type:"category",
+},
 
-                data:names,
 
+series:[{
 
-                axisLabel:{
 
+type:"bar",
 
-                    rotate:45
+data:data.map(x=>({
 
 
-                }
+value:x.money,
 
 
-            },
+itemStyle:{
 
 
+color:x.money>0?
+"#e74c3c":
+"#27ae60"
 
-            yAxis:{
 
+}
 
-                type:"value",
 
-                name:"亿元"
+}))
 
 
-            },
 
+}]
 
 
-            series:[{
-
-
-                type:"bar",
-
-                data:values,
-
-
-                label:{
-
-
-                    show:true,
-
-
-                    position:"top",
-
-
-                    formatter:"{c}亿"
-
-
-                },
-
-
-                itemStyle:{
-
-
-                    color:function(params){
-
-
-                        return colors[
-                        params.dataIndex
-                        ];
-
-
-                    }
-
-
-                }
-
-
-            }]
-
-
-
-        };
-
-
-
-        chart.setOption(option);
-
-
-
-    }
-
-
-    catch(error){
-
-
-        document.getElementById("time")
-        .innerHTML=
-        "数据加载失败："+error;
-
-
-    }
+});
 
 
 
@@ -342,7 +422,7 @@ async function loadData(){
 
 
 
-loadData();
+load();
 
 
 
@@ -350,5 +430,6 @@ loadData();
 
 
 </body>
+
 
 </html>
