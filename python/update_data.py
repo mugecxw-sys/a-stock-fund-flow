@@ -3,105 +3,119 @@ import json
 from datetime import datetime
 
 
-# 获取概念板块资金流
-
 df = ak.stock_sector_fund_flow_rank(
     indicator="今日",
     sector_type="概念资金流"
 )
 
 
-print("数据字段：")
 print(df.columns.tolist())
 
-
-# 取前20
-
-df = df.head(20)
-
-
-# 找名称字段
 
 name_column = None
 
 for col in df.columns:
+
     if "名称" in col:
+
         name_column = col
+
         break
 
 
-if name_column is None:
-    raise Exception("没有找到板块名称字段")
-
-
-
-# 找主力资金字段
 
 money_column = None
 
 for col in df.columns:
 
     if "主力净流入" in col:
+
         money_column = col
+
         break
 
 
 
+if name_column is None:
+
+    raise Exception("没有名称字段")
+
+
 if money_column is None:
 
-    raise Exception(
-        "没有找到主力资金字段"
-    )
+    raise Exception("没有资金字段")
 
 
 
-data = []
+data=[]
 
 
-for _, row in df.iterrows():
+for _,row in df.iterrows():
 
-    name = row[name_column]
-
-    money = row[money_column]
+    name=row[name_column]
 
 
-    # 转数字
+    money=row[money_column]
+
 
     try:
 
-        money = float(money)
+        money=float(money)
 
     except:
 
-        money = 0
+        money=0
 
 
 
-    # 元转亿元
-
-    money = round(
-        money / 100000000,
+    money=round(
+        money/100000000,
         2
     )
 
 
-    data.append(
-        {
-            "name": name,
-            "money": money
-        }
-    )
+    data.append({
+
+        "name":name,
+
+        "money":money
+
+    })
 
 
 
-result = {
+# 按资金排序
+
+# 流入10个
+
+inflow = sorted(
+    data,
+    key=lambda x:x["money"],
+    reverse=True
+)[:10]
+
+
+# 流出10个
+
+outflow = sorted(
+    data,
+    key=lambda x:x["money"]
+)[:10]
+
+
+
+result={
+
 
     "update_time":
-        datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        ),
+    datetime.now().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    ),
 
-    "data": data
+
+    "data":
+    inflow + outflow
+
 
 }
 
@@ -113,6 +127,7 @@ with open(
     encoding="utf-8"
 ) as f:
 
+
     json.dump(
         result,
         f,
@@ -121,4 +136,5 @@ with open(
     )
 
 
-print("资金流更新完成")
+
+print("更新完成")
