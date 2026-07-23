@@ -38,7 +38,6 @@ def get_data():
                 e
             )
 
-
             time.sleep(15)
 
 
@@ -55,21 +54,11 @@ df = get_data()
 
 
 
-# =====================
-# 获取失败
-# 保留旧数据
-# =====================
-
 if df is None:
 
 
     print(
-        "资金接口失败"
-    )
-
-
-    print(
-        "保留已有数据"
+        "资金接口失败，保持旧数据"
     )
 
 
@@ -84,7 +73,7 @@ print(
 
 
 # =====================
-# 找字段
+# 字段识别
 # =====================
 
 
@@ -108,6 +97,7 @@ for col in df.columns:
 
 
 
+
 if name_column is None:
 
     raise Exception(
@@ -125,7 +115,7 @@ if money_column is None:
 
 
 # =====================
-# 数据整理
+# 数据处理
 # =====================
 
 
@@ -145,6 +135,7 @@ for _,row in df.iterrows():
     try:
 
         money=float(money)
+
 
     except:
 
@@ -170,7 +161,7 @@ for _,row in df.iterrows():
 
 
 # =====================
-# 流入流出
+# TOP10
 # =====================
 
 
@@ -196,19 +187,32 @@ outflow=sorted(
 
 
 
+data=inflow+outflow
+
+
+
+# =====================
+# 生成结果
+# =====================
+
+
+now=datetime.now()
+
+
+
 result={
 
 
     "update_time":
 
-        datetime.now().strftime(
+        now.strftime(
             "%Y-%m-%d %H:%M:%S"
         ),
 
 
     "data":
 
-        inflow+outflow
+        data
 
 }
 
@@ -245,29 +249,34 @@ with open(
 
 
 # =====================
-# 保存历史
+# 保存小时历史
 # =====================
 
 
-if not os.path.exists(
-    "history"
-):
-
-    os.makedirs(
-        "history"
-    )
-
-
-
-today=datetime.now().strftime(
+date_folder = now.strftime(
     "%Y-%m-%d"
 )
+
+
+time_file = now.strftime(
+    "%H-%M"
+)
+
+
+
+folder = f"history/{date_folder}"
+
+
+
+if not os.path.exists(folder):
+
+    os.makedirs(folder)
 
 
 
 with open(
 
-    f"history/{today}.json",
+    f"{folder}/{time_file}.json",
 
     "w",
 
@@ -292,4 +301,10 @@ with open(
 
 print(
     "更新完成"
+)
+
+
+print(
+    "历史保存:",
+    f"{folder}/{time_file}.json"
 )
