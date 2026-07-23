@@ -3,28 +3,39 @@ import json
 from datetime import datetime
 
 
-# 获取东方财富概念板块资金流
+# 获取概念板块资金流
 
 df = ak.stock_sector_fund_flow_rank(
     indicator="今日",
     sector_type="概念资金流"
 )
+
+
+print("数据字段：")
 print(df.columns.tolist())
 
-# 按主力净流入排序
-# 取前20个
+
+# 取前20
 
 df = df.head(20)
 
 
-data = []
+# 找名称字段
+
+name_column = None
+
+for col in df.columns:
+    if "名称" in col:
+        name_column = col
+        break
 
 
-for _, row in df.iterrows():
+if name_column is None:
+    raise Exception("没有找到板块名称字段")
 
-    name = row["名称"]
 
-    # 自动寻找资金字段
+
+# 找主力资金字段
 
 money_column = None
 
@@ -35,20 +46,41 @@ for col in df.columns:
         break
 
 
+
 if money_column is None:
+
     raise Exception(
-        "没有找到主力资金字段，请检查AKShare返回数据"
+        "没有找到主力资金字段"
     )
 
 
-money = row[money_column]
+
+data = []
 
 
-    # 单位转换：
-    # 元 -> 亿
+for _, row in df.iterrows():
+
+    name = row[name_column]
+
+    money = row[money_column]
+
+
+    # 转数字
+
+    try:
+
+        money = float(money)
+
+    except:
+
+        money = 0
+
+
+
+    # 元转亿元
 
     money = round(
-        float(money) / 100000000,
+        money / 100000000,
         2
     )
 
@@ -65,13 +97,14 @@ money = row[money_column]
 result = {
 
     "update_time":
-    datetime.now().strftime(
-        "%Y-%m-%d %H:%M:%S"
-    ),
+        datetime.now().strftime(
+            "%Y-%m-%d %H:%M:%S"
+        ),
 
-    "data":data
+    "data": data
 
 }
+
 
 
 with open(
