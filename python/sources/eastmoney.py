@@ -13,7 +13,7 @@ def get_data():
     if df is None or len(df)==0:
 
         raise Exception(
-            "东方财富返回为空"
+            "东方财富主接口为空"
         )
 
 
