@@ -1,61 +1,116 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>A股概念板块主力资金流向</title>
 
+
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
 
 <style>
 
-body {
+body{
+
     margin:0;
-    font-family: Arial, "Microsoft YaHei", sans-serif;
-    background:#f5f5f5;
+
+    background:#f3f5f7;
+
+    font-family:
+    "Microsoft YaHei",
+    Arial;
+
 }
 
-.container {
-    width:95%;
+
+.container{
+
     max-width:1200px;
+
     margin:auto;
+
     padding:20px;
+
 }
 
-h2 {
-    text-align:center;
-}
 
-.time {
-    text-align:center;
-    color:#666;
-    margin-bottom:20px;
-}
 
-#chart {
-    width:100%;
-    height:600px;
+.card{
+
     background:white;
-    border-radius:10px;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:
+    0 3px 15px rgba(0,0,0,0.08);
+
 }
+
+
+
+h1{
+
+    text-align:center;
+
+    font-size:26px;
+
+}
+
+
+.update{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:20px;
+
+}
+
+
+
+#chart{
+
+    width:100%;
+
+    height:650px;
+
+}
+
 
 </style>
+
 
 </head>
 
 
 <body>
 
+
 <div class="container">
 
-<h2>
-A股概念板块主力资金流向
-</h2>
 
-<div class="time" id="updateTime">
-正在加载数据...
+<div class="card">
+
+
+<h1>
+A股概念板块主力资金流向
+</h1>
+
+
+<div class="update" id="time">
+
+数据加载中...
+
 </div>
+
 
 <div id="chart"></div>
 
@@ -63,131 +118,232 @@ A股概念板块主力资金流向
 </div>
 
 
+</div>
+
+
+
 <script>
 
 
 async function loadData(){
 
-    const response = await fetch("moneyflow.json?t=" + Date.now());
 
-    const data = await response.json();
-
-
-    let names=[];
-    let values=[];
-    let colors=[];
+    try{
 
 
-    data.forEach(item=>{
-
-        names.push(item.name);
-
-        values.push(
-            item.money
+        const res =
+        await fetch(
+        "moneyflow.json?t="
+        +Date.now()
         );
 
 
-        if(item.money>=0){
-            colors.push("#e74c3c");
-        }
-        else{
-            colors.push("#2ecc71");
-        }
-
-    });
+        const json =
+        await res.json();
 
 
 
-    let chart = echarts.init(
+        const data =
+        json.data;
+
+
+
+        let names=[];
+
+        let values=[];
+
+        let colors=[];
+
+
+
+        data.forEach(item=>{
+
+
+            names.push(
+                item.name
+            );
+
+
+            values.push(
+                item.money
+            );
+
+
+            if(item.money>=0){
+
+                colors.push("#e74c3c");
+
+            }else{
+
+                colors.push("#2ecc71");
+
+            }
+
+
+        });
+
+
+
+        document.getElementById("time")
+        .innerHTML=
+        "更新时间："
+        +json.update_time;
+
+
+
+        let chart =
+        echarts.init(
         document.getElementById("chart")
-    );
+        );
 
 
-    let option={
+
+        let option={
 
 
-        tooltip:{
-            trigger:"axis",
 
-            formatter:function(params){
-
-                let p=params[0];
-
-                return p.name+
-                "<br/>主力资金："+
-                p.value+
-                " 亿";
-
-            }
-
-        },
+            tooltip:{
 
 
-        grid:{
-            left:"5%",
-            right:"5%",
-            bottom:"20%"
-        },
+                trigger:"axis",
 
 
-        xAxis:{
-
-            type:"category",
-
-            data:names,
-
-            axisLabel:{
-                rotate:45
-            }
-
-        },
+                formatter:function(p){
 
 
-        yAxis:{
-            type:"value",
+                    return p[0].name
+                    +"<br>主力资金："
+                    +p[0].value
+                    +" 亿";
 
-            name:"亿元"
-
-        },
-
-
-        series:[{
-
-            type:"bar",
-
-            data:values,
-
-
-            itemStyle:{
-
-                color:function(params){
-
-                    return colors[params.dataIndex];
 
                 }
 
-            }
 
-
-        }]
-
-    };
-
-
-    chart.setOption(option);
+            },
 
 
 
-    document.getElementById(
-        "updateTime"
-    ).innerHTML=
-    "更新时间："+new Date().toLocaleString();
+            grid:{
+
+
+                left:"5%",
+
+                right:"5%",
+
+                bottom:"25%"
+
+
+            },
+
+
+
+            xAxis:{
+
+
+                type:"category",
+
+                data:names,
+
+
+                axisLabel:{
+
+
+                    rotate:45
+
+
+                }
+
+
+            },
+
+
+
+            yAxis:{
+
+
+                type:"value",
+
+                name:"亿元"
+
+
+            },
+
+
+
+            series:[{
+
+
+                type:"bar",
+
+                data:values,
+
+
+                label:{
+
+
+                    show:true,
+
+
+                    position:"top",
+
+
+                    formatter:"{c}亿"
+
+
+                },
+
+
+                itemStyle:{
+
+
+                    color:function(params){
+
+
+                        return colors[
+                        params.dataIndex
+                        ];
+
+
+                    }
+
+
+                }
+
+
+            }]
+
+
+
+        };
+
+
+
+        chart.setOption(option);
+
+
+
+    }
+
+
+    catch(error){
+
+
+        document.getElementById("time")
+        .innerHTML=
+        "数据加载失败："+error;
+
+
+    }
+
 
 
 }
 
 
+
 loadData();
+
 
 
 </script>
