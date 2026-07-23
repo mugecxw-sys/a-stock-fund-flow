@@ -7,6 +7,13 @@ on:
   schedule:
 
 
+    # 北京时间:
+    # 10:00
+    # 11:00
+    # 13:00
+    # 14:00
+    # 15:00
+
     - cron: "0 2,3,5,6,7 * * 1-5"
 
 
@@ -40,7 +47,7 @@ jobs:
       - name: Checkout
 
 
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
 
 
@@ -48,7 +55,7 @@ jobs:
       - name: Setup Python
 
 
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
 
 
         with:
