@@ -1,435 +1,234 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
-
-
 <head>
-
-
-<meta charset="UTF-8">
-
-
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-
-<title>
-A股资金流监控
-</title>
-
-
-<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-
-
-
-<style>
-
-
-body{
-
-margin:0;
-
-background:#f5f6fa;
-
-font-family:
-"Microsoft YaHei",
-Arial;
-
-color:#222;
-
-}
-
-
-
-.container{
-
-max-width:1200px;
-
-margin:auto;
-
-padding:20px;
-
-}
-
-
-
-.title{
-
-text-align:center;
-
-font-size:28px;
-
-font-weight:bold;
-
-margin-bottom:10px;
-
-}
-
-
-
-.time{
-
-text-align:center;
-
-color:#777;
-
-margin-bottom:20px;
-
-}
-
-
-
-.cards{
-
-display:grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap:20px;
-
-}
-
-
-
-.card{
-
-background:white;
-
-border-radius:16px;
-
-padding:20px;
-
-box-shadow:
-0 5px 20px rgba(0,0,0,.08);
-
-}
-
-
-
-.card h2{
-
-margin-top:0;
-
-}
-
-
-
-.inflow h2{
-
-color:#e74c3c;
-
-}
-
-
-
-.outflow h2{
-
-color:#27ae60;
-
-}
-
-
-
-.item{
-
-display:flex;
-
-justify-content:space-between;
-
-padding:8px 0;
-
-border-bottom:
-1px solid #eee;
-
-}
-
-
-
-.money{
-
-font-weight:bold;
-
-}
-
-
-
-.chart{
-
-margin-top:20px;
-
-height:600px;
-
-background:white;
-
-border-radius:16px;
-
-padding:10px;
-
-}
-
-
-
-@media(max-width:700px){
-
-
-.cards{
-
-grid-template-columns:
-1fr;
-
-}
-
-
-
-}
-
-
-
-</style>
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>A股资金流监控</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f5f6fa;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .time {
+      text-align: center;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      width: fit-content;
+      margin: 0 auto 20px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      background: #eef2ff;
+      color: #34495e;
+    }
+
+    .status.ok,
+    .status.cached {
+      background: #ecfdf3;
+      color: #166534;
+    }
+
+    .status.degraded,
+    .status.stale {
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .status.failed {
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    .inflow h2 {
+      color: #e74c3c;
+    }
+
+    .outflow h2 {
+      color: #27ae60;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .money {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .chart {
+      margin-top: 20px;
+      height: 600px;
+      background: white;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-
-
-
 <body>
-
-
-<div class="container">
-
-
-<div class="title">
-
-A股概念板块主力资金监控
-
-</div>
-
-
-
-<div class="time" id="time">
-
-加载中...
-
-</div>
-
-
-
-<div class="cards">
-
-
-<div class="card inflow">
-
-
-<h2>
-🔥 资金流入 TOP10
-</h2>
-
-
-<div id="inflow"></div>
-
-
-</div>
-
-
-
-
-<div class="card outflow">
-
-
-<h2>
-⚠️ 资金流出 TOP10
-</h2>
-
-
-<div id="outflow"></div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="chart" id="chart"></div>
-
-
-
-</div>
-
-
-
-
-
-<script>
-
-
-async function load(){
-
-
-let res=
-await fetch(
-"moneyflow.json?t="+Date.now()
-);
-
-
-let json=
-await res.json();
-
-
-let data=json.data;
-
-
-
-document.getElementById("time")
-.innerHTML=
-"更新时间："+json.update_time;
-
-
-
-let inflow=data
-.filter(x=>x.money>0)
-.slice(0,10);
-
-
-
-let outflow=data
-.filter(x=>x.money<0)
-.slice(0,10);
-
-
-
-
-document.getElementById("inflow")
-.innerHTML=inflow.map(x=>`
-
-<div class="item">
-
-<span>${x.name}</span>
-
-<span class="money" style="color:#e74c3c">
-
-+${x.money} 亿
-
-</span>
-
-</div>
-
-`).join("");
-
-
-
-
-
-document.getElementById("outflow")
-.innerHTML=outflow.map(x=>`
-
-<div class="item">
-
-<span>${x.name}</span>
-
-<span class="money" style="color:#27ae60">
-
-${x.money} 亿
-
-</span>
-
-</div>
-
-`).join("");
-
-
-
-
-
-let chart=
-echarts.init(
-document.getElementById("chart")
-);
-
-
-
-
-chart.setOption({
-
-
-tooltip:{
-trigger:"axis"
-},
-
-
-xAxis:{
-
-
-type:"category",
-
-data:data.map(x=>x.name),
-
-
-axisLabel:{
-rotate:45
-}
-
-
-},
-
-
-yAxis:{
-
-
-type:"value",
-
-name:"亿元"
-
-
-},
-
-
-series:[{
-
-
-type:"bar",
-
-data:data.map(x=>({
-
-
-value:x.money,
-
-
-itemStyle:{
-
-
-color:x.money>0?
-"#e74c3c":
-"#27ae60"
-
-
-}
-
-
-}))
-
-
-
-}]
-
-
-});
-
-
-
-}
-
-
-
-load();
-
-
-
-</script>
-
-
+  <div class="container">
+    <div class="title">A股概念板块主力资金监控</div>
+    <div class="time" id="time">加载中...</div>
+    <div class="status" id="status">读取状态中...</div>
+
+    <div class="cards">
+      <div class="card inflow">
+        <h2>资金流入 TOP10</h2>
+        <div id="inflow"></div>
+      </div>
+
+      <div class="card outflow">
+        <h2>资金流出 TOP10</h2>
+        <div id="outflow"></div>
+      </div>
+    </div>
+
+    <div class="chart" id="chart"></div>
+  </div>
+
+  <script>
+    async function readJson(url) {
+      const response = await fetch(`${url}?t=${Date.now()}`);
+      if (!response.ok) {
+        throw new Error(`${url} ${response.status}`);
+      }
+      return response.json();
+    }
+
+    async function loadLatest() {
+      try {
+        return await readJson("data/latest.json");
+      } catch (error) {
+        return readJson("moneyflow.json");
+      }
+    }
+
+    async function loadStatus() {
+      try {
+        return await readJson("data/status.json");
+      } catch (error) {
+        return {
+          state: "unknown",
+          message: "未读取到状态文件",
+          last_success_time: null
+        };
+      }
+    }
+
+    function renderList(id, data, color, showPlus) {
+      document.getElementById(id).innerHTML = data.map(item => `
+        <div class="item">
+          <span>${item.name}</span>
+          <span class="money" style="color:${color}">
+            ${showPlus ? "+" : ""}${item.money} 亿
+          </span>
+        </div>
+      `).join("");
+    }
+
+    function renderStatus(status) {
+      const element = document.getElementById("status");
+      element.className = `status ${status.state || "unknown"}`;
+      element.textContent = `${status.message || "状态未知"}${
+        status.last_success_time ? `｜最近成功：${status.last_success_time}` : ""
+      }`;
+    }
+
+    function renderChart(data) {
+      const chart = echarts.init(document.getElementById("chart"));
+      chart.setOption({
+        tooltip: { trigger: "axis" },
+        grid: { left: 56, right: 24, top: 36, bottom: 120 },
+        xAxis: {
+          type: "category",
+          data: data.map(item => item.name),
+          axisLabel: { rotate: 45 }
+        },
+        yAxis: {
+          type: "value",
+          name: "亿元"
+        },
+        series: [{
+          type: "bar",
+          data: data.map(item => ({
+            value: item.money,
+            itemStyle: {
+              color: item.money > 0 ? "#e74c3c" : "#27ae60"
+            }
+          }))
+        }]
+      });
+      window.addEventListener("resize", () => chart.resize());
+    }
+
+    async function load() {
+      try {
+        const [latest, status] = await Promise.all([loadLatest(), loadStatus()]);
+        const data = latest.data || [];
+        const inflow = data.filter(item => item.money > 0).slice(0, 10);
+        const outflow = data.filter(item => item.money < 0).slice(0, 10);
+
+        document.getElementById("time").textContent = `更新时间：${latest.update_time || "-"}`;
+        renderStatus(status);
+        renderList("inflow", inflow, "#e74c3c", true);
+        renderList("outflow", outflow, "#27ae60", false);
+        renderChart(data);
+      } catch (error) {
+        document.getElementById("time").textContent = "数据加载失败";
+        const status = document.getElementById("status");
+        status.className = "status failed";
+        status.textContent = error.message;
+      }
+    }
+
+    load();
+  </script>
 </body>
-
-
 </html>
