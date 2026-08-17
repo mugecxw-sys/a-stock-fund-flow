@@ -1,104 +1,104 @@
 {
-  "update_time": "2026-08-10 14:20:32",
+  "update_time": "2026-08-17 10:58:03",
   "data": [
     {
-      "name": "高带宽内存",
-      "money": 16.95,
+      "name": "半导体概念",
+      "money": 169.99,
       "change": 0.0
     },
     {
-      "name": "味蕾经济",
-      "money": 15.16,
+      "name": "国产芯片",
+      "money": 145.45,
       "change": 0.0
     },
     {
-      "name": "超级品牌",
-      "money": 13.43,
-      "change": 0.0
-    },
-    {
-      "name": "锂电池概念",
-      "money": 12.91,
-      "change": 0.0
-    },
-    {
-      "name": "消费风格",
-      "money": 12.5,
-      "change": 0.0
-    },
-    {
-      "name": "宁组合",
-      "money": 11.85,
-      "change": 0.0
-    },
-    {
-      "name": "白酒",
-      "money": 11.24,
-      "change": 0.0
-    },
-    {
-      "name": "酿酒概念",
-      "money": 11.14,
-      "change": 0.0
-    },
-    {
-      "name": "锂矿概念",
-      "money": 10.09,
-      "change": 0.0
-    },
-    {
-      "name": "黄金概念",
-      "money": 9.36,
+      "name": "存储芯片",
+      "money": 125.31,
       "change": 0.0
     },
     {
       "name": "融资融券",
-      "money": -518.26,
+      "money": 76.41,
       "change": 0.0
     },
     {
-      "name": "MSCI中国",
-      "money": -472.65,
+      "name": "专精特新",
+      "money": 64.43,
       "change": 0.0
     },
     {
-      "name": "富时罗素",
-      "money": -450.98,
+      "name": "消费电子概念",
+      "money": 59.41,
       "change": 0.0
     },
     {
-      "name": "大盘股",
-      "money": -405.53,
+      "name": "沪股通",
+      "money": 58.22,
       "change": 0.0
     },
     {
-      "name": "科技风格",
-      "money": -381.88,
+      "name": "智能穿戴",
+      "money": 56.44,
       "change": 0.0
     },
     {
-      "name": "通信技术",
-      "money": -341.2,
+      "name": "先进封装",
+      "money": 50.64,
       "change": 0.0
     },
     {
-      "name": "HS300_",
-      "money": -338.73,
+      "name": "百元股",
+      "money": 47.94,
       "change": 0.0
     },
     {
-      "name": "深股通",
-      "money": -330.84,
+      "name": "算力概念",
+      "money": -55.73,
       "change": 0.0
     },
     {
-      "name": "大盘成长",
-      "money": -330.17,
+      "name": "大数据",
+      "money": -50.88,
       "change": 0.0
     },
     {
-      "name": "5G概念",
-      "money": -327.12,
+      "name": "云计算",
+      "money": -38.0,
+      "change": 0.0
+    },
+    {
+      "name": "机构重仓",
+      "money": -36.93,
+      "change": 0.0
+    },
+    {
+      "name": "AI应用",
+      "money": -36.27,
+      "change": 0.0
+    },
+    {
+      "name": "深证100R",
+      "money": -34.44,
+      "change": 0.0
+    },
+    {
+      "name": "人工智能",
+      "money": -32.69,
+      "change": 0.0
+    },
+    {
+      "name": "创业板综",
+      "money": -32.2,
+      "change": 0.0
+    },
+    {
+      "name": "互联网服务",
+      "money": -31.47,
+      "change": 0.0
+    },
+    {
+      "name": "权重股",
+      "money": -31.07,
       "change": 0.0
     }
   ]
