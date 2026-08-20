@@ -1,24 +1,19 @@
 {
-  "update_time": "2026-08-20 10:55:20",
+  "update_time": "2026-08-20 14:42:23",
   "data": [
     {
-      "name": "融资融券",
-      "money": 96.8,
-      "change": 0.0
+      "name": "病原体防治",
+      "money": 51.71,
+      "change": 10.86
+    },
+    {
+      "name": "创新药",
+      "money": 63.34,
+      "change": 4.16
     },
     {
       "name": "沪股通",
       "money": 61.2,
-      "change": 0.0
-    },
-    {
-      "name": "创新药",
-      "money": 59.18,
-      "change": 0.0
-    },
-    {
-      "name": "黄金概念",
-      "money": 58.92,
       "change": 0.0
     },
     {
@@ -42,21 +37,6 @@
       "change": 0.0
     },
     {
-      "name": "医药医疗风格",
-      "money": 48.3,
-      "change": 0.0
-    },
-    {
-      "name": "病原体防治",
-      "money": 40.85,
-      "change": 0.0
-    },
-    {
-      "name": "昨日高振幅",
-      "money": -35.51,
-      "change": 0.0
-    },
-    {
       "name": "节能环保",
       "money": -20.99,
       "change": 0.0
@@ -77,11 +57,6 @@
       "change": 0.0
     },
     {
-      "name": "科技风格",
-      "money": -17.57,
-      "change": 0.0
-    },
-    {
       "name": "次新股",
       "money": -16.09,
       "change": 0.0
@@ -99,6 +74,31 @@
     {
       "name": "固态电池",
       "money": -13.97,
+      "change": 0.0
+    },
+    {
+      "name": "CRO",
+      "money": 34.32,
+      "change": 0.0
+    },
+    {
+      "name": "创新医疗服务",
+      "money": 32.37,
+      "change": 0.0
+    },
+    {
+      "name": "病毒防治",
+      "money": 31.2,
+      "change": 0.0
+    },
+    {
+      "name": "合成生物",
+      "money": 28.51,
+      "change": 0.0
+    },
+    {
+      "name": "CAR-T细胞疗法",
+      "money": 28.33,
       "change": 0.0
     }
   ]
