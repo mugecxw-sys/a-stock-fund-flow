@@ -1,105 +1,105 @@
 {
-  "update_time": "2026-08-19 13:28:23",
+  "update_time": "2026-08-20 10:55:20",
   "data": [
     {
-      "name": "净水概念",
-      "money": 1.64,
-      "change": 1.16
-    },
-    {
-      "name": "啤酒概念",
-      "money": 0.46,
-      "change": 0.38
-    },
-    {
-      "name": "代糖概念",
-      "money": 0.8,
-      "change": 0.15
-    },
-    {
-      "name": "宠物经济",
-      "money": 1.65,
-      "change": 0.06
-    },
-    {
-      "name": "租售同权",
-      "money": 1.51,
-      "change": 0.04
-    },
-    {
-      "name": "民爆概念",
-      "money": 0.17,
+      "name": "融资融券",
+      "money": 96.8,
       "change": 0.0
-    },
-    {
-      "name": "资源开采概念",
-      "money": 0.08,
-      "change": 0.0
-    },
-    {
-      "name": "微盘精选",
-      "money": -0.03,
-      "change": 0.0
-    },
-    {
-      "name": "红利股",
-      "money": 0.35,
-      "change": 0.0
-    },
-    {
-      "name": "托育服务",
-      "money": -0.06,
-      "change": 0.0
-    },
-    {
-      "name": "页岩气",
-      "money": -0.07,
-      "change": 0.0
-    },
-    {
-      "name": "煤化工概念",
-      "money": 3.73,
-      "change": -0.01
-    },
-    {
-      "name": "近期摘帽",
-      "money": -0.07,
-      "change": -0.07
-    },
-    {
-      "name": "百元股",
-      "money": -530.25,
-      "change": -148.44
-    },
-    {
-      "name": "科技风格",
-      "money": -531.1,
-      "change": -150.75
     },
     {
       "name": "沪股通",
-      "money": -559.85,
-      "change": -155.46
+      "money": 61.2,
+      "change": 0.0
     },
     {
-      "name": "深成500",
-      "money": -557.97,
-      "change": -158.07
+      "name": "创新药",
+      "money": 59.18,
+      "change": 0.0
     },
     {
-      "name": "大盘股",
-      "money": -610.06,
-      "change": -167.89
+      "name": "黄金概念",
+      "money": 58.92,
+      "change": 0.0
     },
     {
       "name": "2026中报预增",
-      "money": -560.19,
-      "change": -168.45
+      "money": 56.87,
+      "change": 0.0
+    },
+    {
+      "name": "富时罗素",
+      "money": 55.31,
+      "change": 0.0
     },
     {
       "name": "深股通",
-      "money": -781.47,
-      "change": -212.7
+      "money": 53.55,
+      "change": 0.0
+    },
+    {
+      "name": "标准普尔",
+      "money": 50.4,
+      "change": 0.0
+    },
+    {
+      "name": "医药医疗风格",
+      "money": 48.3,
+      "change": 0.0
+    },
+    {
+      "name": "病原体防治",
+      "money": 40.85,
+      "change": 0.0
+    },
+    {
+      "name": "昨日高振幅",
+      "money": -35.51,
+      "change": 0.0
+    },
+    {
+      "name": "节能环保",
+      "money": -20.99,
+      "change": 0.0
+    },
+    {
+      "name": "电池技术",
+      "money": -20.94,
+      "change": 0.0
+    },
+    {
+      "name": "算力概念",
+      "money": -18.15,
+      "change": 0.0
+    },
+    {
+      "name": "军工",
+      "money": -18.01,
+      "change": 0.0
+    },
+    {
+      "name": "科技风格",
+      "money": -17.57,
+      "change": 0.0
+    },
+    {
+      "name": "次新股",
+      "money": -16.09,
+      "change": 0.0
+    },
+    {
+      "name": "商业航天",
+      "money": -15.98,
+      "change": 0.0
+    },
+    {
+      "name": "锂电池概念",
+      "money": -14.11,
+      "change": 0.0
+    },
+    {
+      "name": "固态电池",
+      "money": -13.97,
+      "change": 0.0
     }
   ]
 }
