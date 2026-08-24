@@ -1,8 +1,8 @@
 {
-  "state": "cached",
-  "last_attempt_time": "2026-08-21 15:40:57",
-  "last_success_time": "2026-08-20 14:42:23",
+  "state": "ok",
+  "last_attempt_time": "2026-08-24 11:02:01",
+  "last_success_time": "2026-08-24 11:02:01",
   "source": "eastmoney_akshare",
   "error_type": null,
-  "message": "非交易时段使用最近成功缓存"
+  "message": "东方财富数据更新成功"
 }
