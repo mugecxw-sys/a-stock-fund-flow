@@ -1,6 +1,6 @@
 {
   "state": "degraded",
-  "last_attempt_time": "2026-08-24 13:36:36",
+  "last_attempt_time": "2026-08-24 14:55:12",
   "last_success_time": "2026-08-24 11:02:01",
   "source": "eastmoney_akshare",
   "error_type": "RuntimeError",
