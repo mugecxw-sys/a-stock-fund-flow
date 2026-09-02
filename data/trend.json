@@ -1,104 +1,104 @@
 {
-  "update_time": "2026-08-26 11:03:08",
+  "update_time": "2026-09-02 14:49:45",
   "data": [
     {
-      "name": "MSCI中国",
-      "money": 95.11,
+      "name": "军工",
+      "money": 24.56,
+      "change": 0.0
+    },
+    {
+      "name": "军民融合",
+      "money": 18.2,
+      "change": 0.0
+    },
+    {
+      "name": "铜缆高速连接",
+      "money": 14.91,
+      "change": 0.0
+    },
+    {
+      "name": "大飞机",
+      "money": 14.08,
+      "change": 0.0
+    },
+    {
+      "name": "CRO",
+      "money": 13.86,
+      "change": 0.0
+    },
+    {
+      "name": "液冷服务器",
+      "money": 13.64,
+      "change": 0.0
+    },
+    {
+      "name": "油气设服",
+      "money": 13.32,
+      "change": 0.0
+    },
+    {
+      "name": "航天航空",
+      "money": 12.13,
+      "change": 0.0
+    },
+    {
+      "name": "水利建设",
+      "money": 11.98,
+      "change": 0.0
+    },
+    {
+      "name": "油气资源",
+      "money": 10.88,
       "change": 0.0
     },
     {
       "name": "融资融券",
-      "money": 91.52,
+      "money": -494.7,
       "change": 0.0
     },
     {
-      "name": "沪股通",
-      "money": 87.66,
-      "change": 0.0
-    },
-    {
-      "name": "2026中报预增",
-      "money": 86.61,
-      "change": 0.0
-    },
-    {
-      "name": "AH股",
-      "money": 70.63,
-      "change": 0.0
-    },
-    {
-      "name": "大盘股",
-      "money": 69.75,
+      "name": "MSCI中国",
+      "money": -403.83,
       "change": 0.0
     },
     {
       "name": "富时罗素",
-      "money": 69.14,
+      "money": -383.58,
       "change": 0.0
     },
     {
-      "name": "周期股",
-      "money": 64.3,
+      "name": "深股通",
+      "money": -328.95,
       "change": 0.0
     },
     {
-      "name": "小金属概念",
-      "money": 62.44,
+      "name": "深成500",
+      "money": -291.07,
       "change": 0.0
     },
     {
       "name": "HS300_",
-      "money": 61.31,
+      "money": -273.51,
       "change": 0.0
     },
     {
-      "name": "CPO概念",
-      "money": -26.87,
+      "name": "大盘股",
+      "money": -268.67,
       "change": 0.0
     },
     {
-      "name": "算力概念",
-      "money": -21.92,
+      "name": "标准普尔",
+      "money": -222.58,
       "change": 0.0
     },
     {
-      "name": "昨日高振幅",
-      "money": -21.48,
+      "name": "创业板综",
+      "money": -185.58,
       "change": 0.0
     },
     {
-      "name": "消费电子概念",
-      "money": -21.21,
-      "change": 0.0
-    },
-    {
-      "name": "通信技术",
-      "money": -20.21,
-      "change": 0.0
-    },
-    {
-      "name": "存储芯片",
-      "money": -19.03,
-      "change": 0.0
-    },
-    {
-      "name": "智能穿戴",
-      "money": -18.48,
-      "change": 0.0
-    },
-    {
-      "name": "国产芯片",
-      "money": -16.75,
-      "change": 0.0
-    },
-    {
-      "name": "5G概念",
-      "money": -16.49,
-      "change": 0.0
-    },
-    {
-      "name": "股权分散",
-      "money": -16.17,
+      "name": "2026中报预增",
+      "money": -177.51,
       "change": 0.0
     }
   ]
