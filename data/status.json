@@ -1,8 +1,8 @@
 {
-  "state": "cached",
-  "last_attempt_time": "2026-09-02 19:57:11",
+  "state": "stale",
+  "last_attempt_time": "2026-09-03 14:52:09",
   "last_success_time": "2026-09-02 14:49:45",
   "source": "eastmoney_akshare",
-  "error_type": null,
-  "message": "非交易时段使用最近成功缓存"
+  "error_type": "RuntimeError",
+  "message": "东方财富请求失败，使用最近成功缓存"
 }
