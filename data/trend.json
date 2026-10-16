@@ -1,104 +1,104 @@
 {
-  "update_time": "2026-09-02 14:49:45",
+  "update_time": "2026-10-16 14:44:58",
   "data": [
     {
+      "name": "半导体概念",
+      "money": 42.54,
+      "change": 0.0
+    },
+    {
+      "name": "存储芯片",
+      "money": 37.0,
+      "change": 0.0
+    },
+    {
       "name": "军工",
-      "money": 24.56,
+      "money": 36.6,
+      "change": 0.0
+    },
+    {
+      "name": "低空经济",
+      "money": 32.07,
+      "change": 0.0
+    },
+    {
+      "name": "国产芯片",
+      "money": 28.69,
+      "change": 0.0
+    },
+    {
+      "name": "无人机",
+      "money": 27.63,
+      "change": 0.0
+    },
+    {
+      "name": "贬值受益",
+      "money": 27.25,
       "change": 0.0
     },
     {
       "name": "军民融合",
-      "money": 18.2,
+      "money": 24.35,
       "change": 0.0
     },
     {
-      "name": "铜缆高速连接",
-      "money": 14.91,
+      "name": "华为汽车",
+      "money": 20.69,
       "change": 0.0
     },
     {
-      "name": "大飞机",
-      "money": 14.08,
-      "change": 0.0
-    },
-    {
-      "name": "CRO",
-      "money": 13.86,
-      "change": 0.0
-    },
-    {
-      "name": "液冷服务器",
-      "money": 13.64,
-      "change": 0.0
-    },
-    {
-      "name": "油气设服",
-      "money": 13.32,
-      "change": 0.0
-    },
-    {
-      "name": "航天航空",
-      "money": 12.13,
-      "change": 0.0
-    },
-    {
-      "name": "水利建设",
-      "money": 11.98,
-      "change": 0.0
-    },
-    {
-      "name": "油气资源",
-      "money": 10.88,
-      "change": 0.0
-    },
-    {
-      "name": "融资融券",
-      "money": -494.7,
-      "change": 0.0
-    },
-    {
-      "name": "MSCI中国",
-      "money": -403.83,
+      "name": "高市净率",
+      "money": 20.65,
       "change": 0.0
     },
     {
       "name": "富时罗素",
-      "money": -383.58,
-      "change": 0.0
-    },
-    {
-      "name": "深股通",
-      "money": -328.95,
+      "money": -59.78,
       "change": 0.0
     },
     {
       "name": "深成500",
-      "money": -291.07,
+      "money": -56.33,
       "change": 0.0
     },
     {
-      "name": "HS300_",
-      "money": -273.51,
-      "change": 0.0
-    },
-    {
-      "name": "大盘股",
-      "money": -268.67,
-      "change": 0.0
-    },
-    {
-      "name": "标准普尔",
-      "money": -222.58,
-      "change": 0.0
-    },
-    {
-      "name": "创业板综",
-      "money": -185.58,
+      "name": "深股通",
+      "money": -45.6,
       "change": 0.0
     },
     {
       "name": "2026中报预增",
-      "money": -177.51,
+      "money": -39.73,
+      "change": 0.0
+    },
+    {
+      "name": "MSCI中国",
+      "money": -37.17,
+      "change": 0.0
+    },
+    {
+      "name": "中盘股",
+      "money": -36.72,
+      "change": 0.0
+    },
+    {
+      "name": "周期股",
+      "money": -34.77,
+      "change": 0.0
+    },
+    {
+      "name": "AI应用",
+      "money": -33.09,
+      "change": 0.0
+    },
+    {
+      "name": "AIGC概念",
+      "money": -32.35,
+      "change": 0.0
+    },
+    {
+      "name": "华为概念",
+      "money": -31.5,
       "change": 0.0
     }
   ]
