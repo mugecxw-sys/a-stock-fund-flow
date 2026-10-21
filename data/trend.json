@@ -1,104 +1,104 @@
 {
-  "update_time": "2026-10-16 14:44:58",
+  "update_time": "2026-10-21 15:05:14",
   "data": [
     {
+      "name": "通信技术",
+      "money": 42.94,
+      "change": 0.0
+    },
+    {
+      "name": "5G概念",
+      "money": 33.43,
+      "change": 0.0
+    },
+    {
+      "name": "科技风格",
+      "money": 32.25,
+      "change": 0.0
+    },
+    {
+      "name": "百元股",
+      "money": 30.67,
+      "change": 0.0
+    },
+    {
+      "name": "小盘成长",
+      "money": 30.56,
+      "change": 0.0
+    },
+    {
+      "name": "QFII重仓",
+      "money": 28.72,
+      "change": 0.0
+    },
+    {
+      "name": "光纤概念",
+      "money": 28.37,
+      "change": 0.0
+    },
+    {
       "name": "半导体概念",
-      "money": 42.54,
-      "change": 0.0
-    },
-    {
-      "name": "存储芯片",
-      "money": 37.0,
-      "change": 0.0
-    },
-    {
-      "name": "军工",
-      "money": 36.6,
-      "change": 0.0
-    },
-    {
-      "name": "低空经济",
-      "money": 32.07,
+      "money": 28.27,
       "change": 0.0
     },
     {
       "name": "国产芯片",
-      "money": 28.69,
+      "money": 27.62,
       "change": 0.0
     },
     {
-      "name": "无人机",
-      "money": 27.63,
+      "name": "CPO概念",
+      "money": 24.85,
       "change": 0.0
     },
     {
-      "name": "贬值受益",
-      "money": 27.25,
-      "change": 0.0
-    },
-    {
-      "name": "军民融合",
-      "money": 24.35,
-      "change": 0.0
-    },
-    {
-      "name": "华为汽车",
-      "money": 20.69,
-      "change": 0.0
-    },
-    {
-      "name": "高市净率",
-      "money": 20.65,
+      "name": "HS300_",
+      "money": -103.37,
       "change": 0.0
     },
     {
       "name": "富时罗素",
-      "money": -59.78,
+      "money": -102.34,
       "change": 0.0
     },
     {
-      "name": "深成500",
-      "money": -56.33,
-      "change": 0.0
-    },
-    {
-      "name": "深股通",
-      "money": -45.6,
-      "change": 0.0
-    },
-    {
-      "name": "2026中报预增",
-      "money": -39.73,
+      "name": "融资融券",
+      "money": -100.67,
       "change": 0.0
     },
     {
       "name": "MSCI中国",
-      "money": -37.17,
+      "money": -98.25,
       "change": 0.0
     },
     {
-      "name": "中盘股",
-      "money": -36.72,
+      "name": "大盘股",
+      "money": -76.86,
       "change": 0.0
     },
     {
-      "name": "周期股",
-      "money": -34.77,
+      "name": "标准普尔",
+      "money": -73.94,
       "change": 0.0
     },
     {
-      "name": "AI应用",
-      "money": -33.09,
+      "name": "电池技术",
+      "money": -72.58,
       "change": 0.0
     },
     {
-      "name": "AIGC概念",
-      "money": -32.35,
+      "name": "深成500",
+      "money": -70.48,
       "change": 0.0
     },
     {
-      "name": "华为概念",
-      "money": -31.5,
+      "name": "锂电池概念",
+      "money": -68.32,
+      "change": 0.0
+    },
+    {
+      "name": "新能源车",
+      "money": -62.84,
       "change": 0.0
     }
   ]
