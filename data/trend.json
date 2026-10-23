@@ -1,104 +1,104 @@
 {
-  "update_time": "2026-10-21 15:05:14",
+  "update_time": "2026-10-23 14:59:24",
   "data": [
     {
-      "name": "通信技术",
-      "money": 42.94,
+      "name": "人工智能",
+      "money": 110.89,
       "change": 0.0
     },
     {
-      "name": "5G概念",
-      "money": 33.43,
-      "change": 0.0
-    },
-    {
-      "name": "科技风格",
-      "money": 32.25,
-      "change": 0.0
-    },
-    {
-      "name": "百元股",
-      "money": 30.67,
-      "change": 0.0
-    },
-    {
-      "name": "小盘成长",
-      "money": 30.56,
-      "change": 0.0
-    },
-    {
-      "name": "QFII重仓",
-      "money": 28.72,
-      "change": 0.0
-    },
-    {
-      "name": "光纤概念",
-      "money": 28.37,
-      "change": 0.0
-    },
-    {
-      "name": "半导体概念",
-      "money": 28.27,
+      "name": "消费电子概念",
+      "money": 79.22,
       "change": 0.0
     },
     {
       "name": "国产芯片",
-      "money": 27.62,
+      "money": 78.19,
       "change": 0.0
     },
     {
-      "name": "CPO概念",
-      "money": 24.85,
+      "name": "人形机器人",
+      "money": 70.18,
       "change": 0.0
     },
     {
-      "name": "HS300_",
-      "money": -103.37,
+      "name": "深股通",
+      "money": 66.91,
       "change": 0.0
     },
     {
-      "name": "富时罗素",
-      "money": -102.34,
+      "name": "机器人概念",
+      "money": 57.76,
       "change": 0.0
     },
     {
-      "name": "融资融券",
-      "money": -100.67,
-      "change": 0.0
-    },
-    {
-      "name": "MSCI中国",
-      "money": -98.25,
-      "change": 0.0
-    },
-    {
-      "name": "大盘股",
-      "money": -76.86,
-      "change": 0.0
-    },
-    {
-      "name": "标准普尔",
-      "money": -73.94,
-      "change": 0.0
-    },
-    {
-      "name": "电池技术",
-      "money": -72.58,
+      "name": "东方财富热股",
+      "money": 57.66,
       "change": 0.0
     },
     {
       "name": "深成500",
-      "money": -70.48,
+      "money": 57.47,
       "change": 0.0
     },
     {
-      "name": "锂电池概念",
-      "money": -68.32,
+      "name": "深证100R",
+      "money": 54.69,
       "change": 0.0
     },
     {
-      "name": "新能源车",
-      "money": -62.84,
+      "name": "虚拟现实",
+      "money": 54.19,
+      "change": 0.0
+    },
+    {
+      "name": "沪股通",
+      "money": -96.87,
+      "change": 0.0
+    },
+    {
+      "name": "央国企改革",
+      "money": -81.41,
+      "change": 0.0
+    },
+    {
+      "name": "标准普尔",
+      "money": -63.37,
+      "change": 0.0
+    },
+    {
+      "name": "上证180_",
+      "money": -50.12,
+      "change": 0.0
+    },
+    {
+      "name": "破净股",
+      "money": -49.23,
+      "change": 0.0
+    },
+    {
+      "name": "PCB",
+      "money": -40.66,
+      "change": 0.0
+    },
+    {
+      "name": "大盘价值",
+      "money": -39.34,
+      "change": 0.0
+    },
+    {
+      "name": "中特估",
+      "money": -33.63,
+      "change": 0.0
+    },
+    {
+      "name": "长期破净",
+      "money": -31.62,
+      "change": 0.0
+    },
+    {
+      "name": "金融地产风格",
+      "money": -30.76,
       "change": 0.0
     }
   ]
